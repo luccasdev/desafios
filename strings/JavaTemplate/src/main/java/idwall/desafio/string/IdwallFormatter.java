@@ -38,6 +38,10 @@ public class IdwallFormatter extends StringFormatter {
         }
         lines.add(builder.toString());
 
+        if (this.isJustify()) {
+            lines = this.justifyLines(lines);
+        }
+
         return lines.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(LINE_BREAK));
@@ -52,8 +56,43 @@ public class IdwallFormatter extends StringFormatter {
         return word.length() + lineLength + 1 > this.getLimit();
     }
 
+
+    /**
+     * @param lines - List of lines to apply justify
+     * @return List<String>
+     */
     @Override
     public List<String> justifyLines(List<String> lines) {
-        throw new UnsupportedOperationException();
+        List<String> justifiedLines = new ArrayList<>();
+
+        for (String line : lines) {
+            String[] words = line.split(WORD_SPLIT);
+            String outerPadding = "";
+            int remaining = this.getLimit() - line.length();
+            int spaces = remaining / words.length;
+            int spacesToFill = remaining % words.length;
+
+            StringBuilder builder = new StringBuilder();
+
+            for (String word : words) {
+                int innerPadding = spaces + 1;
+                if (spacesToFill > 0) {
+                    innerPadding += 1;
+                    spacesToFill--;
+                }
+                builder.append(word).append(String.format("%" + innerPadding + "s", ""));
+            }
+
+            builder = new StringBuilder(builder.toString().trim());
+
+            spacesToFill = this.getLimit() - builder.length();
+
+            if (spacesToFill > 0) {
+                outerPadding = String.format("%" + spacesToFill + "s", "");
+            }
+
+            justifiedLines.add(outerPadding + builder);
+        }
+        return justifiedLines;
     }
 }
