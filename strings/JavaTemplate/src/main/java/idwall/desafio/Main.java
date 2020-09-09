@@ -43,8 +43,9 @@ public class Main {
 
         // Run IdwallFormatter
         final StringFormatter sf = new IdwallFormatter();
-        String outputText = sf.format(text);
-
+        sf.setLimit(limit);
+        sf.setJustify(justify);
+        String outputText = sf.format(DEFAULT_INPUT_TEXT);
         // Print output text
         System.out.println("Output: ");
         System.out.println(outputText);
