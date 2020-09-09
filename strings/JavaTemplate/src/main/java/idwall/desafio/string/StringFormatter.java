@@ -1,7 +1,8 @@
 package idwall.desafio.string;
 
 /**
- * Created by Rodrigo Catão Araujo on 06/02/2018.
+ * Template by Rodrigo Catão Araujo on 06/02/2018.
+ * Implemented by Lucas Souza on 08/09/2020.
  */
 public abstract class StringFormatter {
 
