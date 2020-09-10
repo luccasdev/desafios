@@ -46,6 +46,7 @@ public class Main {
         sf.setLimit(limit);
         sf.setJustify(justify);
         String outputText = sf.format(DEFAULT_INPUT_TEXT);
+
         // Print output text
         System.out.println("Output: ");
         System.out.println(outputText);
