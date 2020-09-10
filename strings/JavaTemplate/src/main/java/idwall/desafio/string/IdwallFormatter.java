@@ -1,8 +1,8 @@
 package idwall.desafio.string;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Template by Rodrigo Catão Araujo on 06/02/2018.
@@ -11,88 +11,95 @@ import java.util.stream.Collectors;
 public class IdwallFormatter extends StringFormatter {
 
     private static final String LINE_BREAK = "\n";
+    private static final String PARAGRAPH_BREAK = "\n\n";
     private static final String WHITE_SPACE = " ";
-    private static final String WORD_SPLIT = " +";
+    private static final String WORD_SPLIT = " ";
 
-    /**
-     * It receives a text and should return it formatted
-     *
-     * @param text - Text to apply format
-     * @return String
-     */
     @Override
     public String format(String text) {
-        String[] words = text.split(WORD_SPLIT);
-        StringBuilder builder = new StringBuilder();
-        List<String> lines = new ArrayList<>();
+        List<String> paragraphs = Arrays.asList(text.split(PARAGRAPH_BREAK).clone());
 
-        for (String word : words) {
+        StringBuilder textFormattedBuilder = new StringBuilder();
 
-            if (this.fitInLine(word, builder.length())) {
-                lines.add(builder.toString());
-                builder = new StringBuilder();
+        for (Iterator<String> paragraphIterator = paragraphs.iterator(); paragraphIterator.hasNext();) {
+            StringBuilder paragraphBuilder = new StringBuilder();
+            String paragraph = paragraphIterator.next();
+            String[] words = paragraph.split(WORD_SPLIT);
+            int totalWordsInLine = 0;
+
+            for (String word : words) {
+
+                if (this.notFitInLine(word, totalWordsInLine)) {
+                    totalWordsInLine = word.length() + 1;
+                    paragraphBuilder.append(LINE_BREAK).append(word);
+                } else {
+                    totalWordsInLine += word.length() + 1;
+                    paragraphBuilder.append(WHITE_SPACE).append(word);
+                }
             }
 
-            builder.append(WHITE_SPACE).append(word);
-            builder = new StringBuilder(builder.toString().trim());
-        }
-        lines.add(builder.toString());
+            String paragraphFormatted = paragraphBuilder.toString().trim();
 
-        if (this.isJustify()) {
-            lines = this.justifyLines(lines);
+            if (this.isJustify()) {
+                paragraphFormatted = justifyParagraph(paragraphFormatted);
+            }
+
+            textFormattedBuilder.append(paragraphFormatted);
+
+            if (paragraphIterator.hasNext()) {
+                textFormattedBuilder.append(PARAGRAPH_BREAK);
+            }
         }
 
-        return lines.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(LINE_BREAK));
+        return textFormattedBuilder.toString();
     }
 
-    /**
-     * @param word - Word to validate if is available in line
-     * @param lineLength - current length in line
-     * @return boolean
-     */
-    private boolean fitInLine(String word, Integer lineLength) {
-        return word.length() + lineLength + 1 > this.getLimit();
+    private boolean notFitInLine(String word, Integer lineLength) {
+        return word.length() + lineLength > this.getLimit();
     }
 
 
-    /**
-     * @param lines - List of lines to apply justify
-     * @return List<String>
-     */
     @Override
-    public List<String> justifyLines(List<String> lines) {
-        List<String> justifiedLines = new ArrayList<>();
+    public String justifyParagraph(String paragraph) {
+        String[] lines = paragraph.split("(?=\n)");
+
+        StringBuilder paragraphJustifiedBuilder = new StringBuilder();
 
         for (String line : lines) {
             String[] words = line.split(WORD_SPLIT);
             String outerPadding = "";
-            int remaining = this.getLimit() - line.length();
-            int spaces = remaining / words.length;
+
+            int remaining = calculateRemaining(line);
+            int spacesPerWord = (remaining / words.length) + 1;
             int spacesToFill = remaining % words.length;
 
-            StringBuilder builder = new StringBuilder();
-
             for (String word : words) {
-                int innerPadding = spaces + 1;
+                int padding = spacesPerWord;
                 if (spacesToFill > 0) {
-                    innerPadding += 1;
+                    padding += 1;
                     spacesToFill--;
                 }
-                builder.append(word).append(String.format("%" + innerPadding + "s", ""));
+                paragraphJustifiedBuilder.append(word).append(String.format("%" + padding + "s", ""));
             }
 
-            builder = new StringBuilder(builder.toString().trim());
+            paragraphJustifiedBuilder = new StringBuilder(paragraphJustifiedBuilder.toString().trim());
 
-            spacesToFill = this.getLimit() - builder.length();
+            spacesToFill = this.getLimit() - paragraphJustifiedBuilder.length();
 
             if (spacesToFill > 0) {
                 outerPadding = String.format("%" + spacesToFill + "s", "");
             }
-
-            justifiedLines.add(outerPadding + builder);
+            paragraphJustifiedBuilder = paragraphJustifiedBuilder.insert(0, outerPadding);
         }
-        return justifiedLines;
+        return paragraphJustifiedBuilder.toString();
     }
+
+    public int calculateRemaining(String line) {
+        int lineSizeDifference = 0;
+        if (line.contains(LINE_BREAK)) {
+            lineSizeDifference = 1;
+        }
+        return this.getLimit() - (line.length() - lineSizeDifference);
+    }
+
 }

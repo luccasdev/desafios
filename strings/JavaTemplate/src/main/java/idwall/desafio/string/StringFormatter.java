@@ -27,10 +27,10 @@ public abstract class StringFormatter {
     /**
      * It receives a text and should return it formatted
      *
-     * @param lines - Lines to apply format
+     * @param paragraph - Paragraph to apply format
      * @return List<String>
      */
-    public abstract List<String> justifyLines(List<String> lines);
+    public abstract String justifyParagraph(String paragraph);
 
 
     public Integer getLimit() {
