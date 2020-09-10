@@ -58,7 +58,6 @@ public class IdwallFormatter extends StringFormatter {
         return word.length() + lineLength > this.getLimit();
     }
 
-
     @Override
     public String justifyParagraph(String paragraph) {
         String[] lines = paragraph.split("(?=\n)");
