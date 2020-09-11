@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,6 @@ public class RedditThreadController {
 
     @GetMapping("/hot")
     public List<RedditThread> findHotRedditThreads(@RequestParam("subreddits") String subreddits) {
-        return this.redditThreadService.findHotRedditThreadsBySubreddits(subreddits);
+        return this.redditThreadService.findHotRedditThreadsBySubreddits(Arrays.asList(subreddits.split(";")));
     }
 }

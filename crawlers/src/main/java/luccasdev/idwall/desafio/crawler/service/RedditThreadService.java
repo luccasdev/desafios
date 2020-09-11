@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -24,11 +23,10 @@ public class RedditThreadService {
     private static final String SUBREDDIT_SEPARATOR = ";";
     private static final String EMPTY_SUBREDDIT_MESSAGE = "Você deve informar ao menos um subreddit.";
 
-    public List<RedditThread> findHotRedditThreadsBySubreddits(String subreddits) {
-        if (Strings.isEmpty(subreddits))
+    public List<RedditThread> findHotRedditThreadsBySubreddits(List<String> subredditList) {
+        if (subredditList.isEmpty())
             throw new CustomException(EMPTY_SUBREDDIT_MESSAGE, HttpStatus.BAD_REQUEST);
 
-        List<String> subredditList = Arrays.asList(subreddits.split(SUBREDDIT_SEPARATOR));
         List<RedditThread> hotThreadList = new ArrayList<>();
 
         subredditList.forEach(subreddit -> {
@@ -51,7 +49,7 @@ public class RedditThreadService {
         return hotThreadList;
     }
 
-    public List<Element> findAllThreadElements(String subreddit) throws IOException {
+    private List<Element> findAllThreadElements(String subreddit) throws IOException {
         Document subredditDocument = Jsoup.connect(REDDIT_URL + SUBREDDIT_PATH + subreddit + "?limit=" + PAGINATION_LIMIT).get();
         return subredditDocument.getElementById("siteTable").children().select("div[class*=thing]");
     }
