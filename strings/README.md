@@ -1,10 +1,10 @@
 # Entrega - Desafio Strings
 
 <p align="center">
-  <a href="#Entendimento">Entendimento</a> •
-  <a href="#Fluxo">Fluxo</a> •
-  <a href="#Como Executar">Como Executar</a> •
-  <a href="#Contato">Contato</a>
+  <a href="#entendimento">Entendimento</a> •
+  <a href="#fluxo">Fluxo</a> •
+  <a href="#como-executar">Como Executar</a> •
+  <a href="#contato">Contato</a>
 </p>
 
 ---
