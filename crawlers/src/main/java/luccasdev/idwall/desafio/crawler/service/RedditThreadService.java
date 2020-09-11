@@ -1,12 +1,10 @@
 package luccasdev.idwall.desafio.crawler.service;
 
-import luccasdev.idwall.desafio.crawler.errors.CustomException;
 import luccasdev.idwall.desafio.crawler.model.RedditThread;
 import org.apache.logging.log4j.util.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,12 +18,8 @@ public class RedditThreadService {
     private static final String SUBREDDIT_PATH= "/r/";
     private static final Integer PAGINATION_LIMIT = 50;
     private static final Integer HOT_THREAD_POINTS = 5000;
-    private static final String EMPTY_SUBREDDIT_MESSAGE = "Você deve informar ao menos um subreddit.";
 
     public List<RedditThread> findHotRedditThreadsBySubreddits(List<String> subredditList) {
-        if (subredditList.isEmpty())
-            throw new CustomException(EMPTY_SUBREDDIT_MESSAGE, HttpStatus.BAD_REQUEST);
-
         List<RedditThread> hotThreadList = new ArrayList<>();
 
         subredditList.forEach(subreddit -> {

@@ -12,7 +12,7 @@ public class MessageUtil {
 
     public static final String BREAK_LINE = "\n";
 
-    public static final String ON_RESPONSE_MESSAGE = "Se liga! Encontrei umas Threads que estão bombando, olha ai!";
+    public static final String ON_RESPONSE_MESSAGE = "Se liga! Nessa Thread que ta bombando no Reddit!";
 
     public static final String HELP_MESSAGE = "Vi que você precisa de ajuda, para ficar por dentro das threads" +
             " que estão bombando, basta digitar /NadaPraFazer [+ Lista de subrredits]";
@@ -21,6 +21,8 @@ public class MessageUtil {
             " das threads que estão bombando!, digite /NadaPraFazer [+ Lista de subrredits], que eu te mostro!";
 
     public static final String UNKNOWN_MESSAGE = "Desculpe não entendi, tente digitar o comando /Help";
+
+    public static final String EMPTY_SUBREDDIT_MESSAGE = "Você deve informar ao menos um subreddit.";
 
     public List<String> formatUserMessageToSubreddit(String userMessage) {
         List<String> subRedditList = new ArrayList<>();
