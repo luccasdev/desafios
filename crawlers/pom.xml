@@ -18,6 +18,7 @@
         <java.version>11</java.version>
         <jsoup.version>1.13.1</jsoup.version>
         <telegram.starter.version>0.22</telegram.starter.version>
+        <dockerfile.version>1.4.1</dockerfile.version>
     </properties>
 
     <dependencies>
@@ -59,6 +60,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}-app</repository>
+                </configuration>
             </plugin>
         </plugins>
     </build>
