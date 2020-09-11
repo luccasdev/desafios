@@ -17,6 +17,7 @@
     <properties>
         <java.version>11</java.version>
         <jsoup.version>1.13.1</jsoup.version>
+        <telegram.starter.version>0.22</telegram.starter.version>
     </properties>
 
     <dependencies>
@@ -38,7 +39,7 @@
         <dependency>
             <groupId>com.github.xabgesagtx</groupId>
             <artifactId>telegram-spring-boot-starter</artifactId>
-            <version>0.22</version>
+            <version>${telegram.starter.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

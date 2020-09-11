@@ -20,7 +20,6 @@ public class RedditThreadService {
     private static final String SUBREDDIT_PATH= "/r/";
     private static final Integer PAGINATION_LIMIT = 50;
     private static final Integer HOT_THREAD_POINTS = 5000;
-    private static final String SUBREDDIT_SEPARATOR = ";";
     private static final String EMPTY_SUBREDDIT_MESSAGE = "Você deve informar ao menos um subreddit.";
 
     public List<RedditThread> findHotRedditThreadsBySubreddits(List<String> subredditList) {
