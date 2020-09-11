@@ -15,7 +15,7 @@
 
 A princípio utilizei lógica de quebrar o texto em parágrafos, realizando primeiro a formatação do primeiro parágrafo e depois do segundo, e ao final unindo os dois parágrafos formatados e limitados com base no parâmetro.
 
-Para realizar a limitação precisei percorrer a quantidade de palavras já existentes em uma linha, e verificar se essa quantidade somado com o tamanho da palavra atual da repetição era maior que o limite estabelecido, o método que aplica essa validação é o ``` notFitInLine(String word, Integer lineLength) ``` que retornasse a palavra cabe ou não na linha.
+Para realizar a limitação precisei percorrer a quantidade de palavras já existentes em uma linha, e verificar se essa quantidade somado com o tamanho da palavra atual da repetição era maior que o limite estabelecido, o método que aplica essa validação é o ``` notFitInLine(String word, Integer lineLength) ``` que retorna se a palavra cabe ou não na linha.
 
 2 - Justificar
 
