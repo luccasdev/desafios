@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class CustomExceptionDto {
+public class CustomExceptionDTO {
 
     private String message;
     private int status;

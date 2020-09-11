@@ -32,7 +32,7 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
         return new ResponseEntity<>(
-                new CustomExceptionDto(
+                new CustomExceptionDTO(
                         ex.getMessage(),
                         Objects.requireNonNullElse(status, HttpStatus.INTERNAL_SERVER_ERROR).value(),
                         Objects.requireNonNullElse(status, HttpStatus.INTERNAL_SERVER_ERROR).getReasonPhrase(),
