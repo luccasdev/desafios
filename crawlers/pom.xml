@@ -67,7 +67,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>idwall.desafio.Main</mainClass>
+                            <mainClass>luccasdev.idwall.desafio.crawler.CrawlerApplication</mainClass>
                         </manifest>
                     </archive>
                     <finalName>RedditCrawlerBot</finalName>
@@ -87,7 +87,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>idwall.desafio.Main</mainClass>
+                            <mainClass>luccasdev.idwall.desafio.crawler.CrawlerApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
