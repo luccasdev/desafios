@@ -14,16 +14,6 @@ public class IdwallFormatterTest {
     private static final Integer DEFAULT_LIMIT = 40;
 
     @Test
-    public void whenTextIsEmptyReturnsOutputEmpty(){
-        String emptyText = "";
-
-        StringFormatter stringFormatter = new IdwallFormatter();
-        String output = stringFormatter.format(emptyText);
-
-        assertTrue(output.isEmpty());
-    }
-
-    @Test
     public void formatTextAndReturnsFormattedOutput() {
         String textFormatted =
                 "In the beginning God created the heavens\n" +

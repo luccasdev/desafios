@@ -5,4 +5,4 @@ COPY . .
 RUN mvn clean install
 WORKDIR target
 
-ENTRYPOINT ["java", "-jar", "RedditCrawlerBot-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "StringFormatter-jar-with-dependencies.jar"]
