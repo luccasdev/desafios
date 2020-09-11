@@ -1,3 +1,103 @@
+# Entrega - Desafio Crawlers
+
+<p align="center">
+  <a href="#entendimento">Entendimento</a> •
+  <a href="#fluxo">Fluxo</a> •
+  <a href="#como-executar">Como Executar</a> •
+  <a href="#contato">Contato</a>
+</p>
+
+---
+
+## Entendimento
+
+1 - Reddit Crawler
+
+A princípio criei uma aplicação Spring Boot na versão 2.3.3, utilizando Java 11.
+
+A parte da extração de conteúdo do site do [Reddit](https://old.reddit.com) foi feito com a utilização da lib [JSOUP](https://jsoup.org/)
+
+Foi criado pequenos métodos que realizam a busca e extraem as informações baseado nos subrredits.
+
+2 - Integração com o Bot
+
+Utilizei um [starter](https://github.com/xabgesagtx/telegram-spring-boot-starter) para facilitar a integração com a API do Telegram.
+
+Realizei os respectivos tratamentos de mensagens vindas do usuário e direcionamentos para os fluxos baseado no comando da mensagem.
+
+Tipos de comandos e retornos:
+1. /Start -> "Olá, sou o MrLuke, o melhor BOT para te ajudar a ficar por dentro das threads que estão bombando!, digite /NadaPraFazer [+ Lista de subrredits], que eu te mostro!"
+
+2. /Help -> "Vi que você precisa de ajuda, para ficar por dentro das threads que estão bombando, basta digitar /NadaPraFazer [+ Lista de subrredits]"
+
+3. /NadaPraFazer [subreddits] -> "Se liga! Nessa Thread que ta bombando no Reddit! {}"
+
+---
+
+## Fluxo
+
+![Crawlers](https://i.imgur.com/v42tQb1.png)
+
+---
+
+## Como Executar
+
+- API REST
+Basta realizar um `GET` no endpoint `/thread/hot` , passando as subreddits separados por ponto-e-vírgula (`;`) no parâmetro da requisição.
+Exemplo de como deve ficar: http://localhost:8080/thread/hot?subreddits=worldnews;cats
+
+- **Você envia:**  Os Subrredits que você quer realizar a busca.
+- **Você recebe:** Uma lista de threads que estão em alta, baseado nos subreddits.
+
+
+**Request:**
+```json
+GET /thread/hot HTTP/1.1
+Query-Parameters: Lista dos subreddits separada por ponto-e-vírgula
+```
+
+**Sucesso na requisição:**
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "title": "Tesla Model Y Owners Find Cooling System Cobbled Together With Home Depot-Grade Fake Wood",
+    "link": "https://old.reddit.com/r/cars/comments/ipi89a/tesla_model_y_owners_find_cooling_system_cobbled/",
+    "commentLink": "https://old.reddit.com/r/cars/comments/ipi89a/tesla_model_y_owners_find_cooling_system_cobbled/",
+    "subreddit": "cars",
+    "upVotes": 7030
+  }
+]
+```
+**Tratamento ao enviar não enviar subreddits:**
+```json
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "message": "Você deve informar ao menos um subreddit.",
+  "status": 400,
+  "error": "Bad Request",
+  "path": "uri=/thread/hot",
+  "timestamp": "2020-09-11T16:16:45.967+00:00"
+}
+``` 
+- Rodando o Container Docker
+1. Efetue o git clone do projeto
+2. Abra a pasta princípal do projeto das Strings
+3. Execute o comando: ```docker build -t crawler . ``` para que seja criado a imagem do docker
+4. Execute o comando: ```docker run -d --name crawler crawler ```
+
+---
+
+## Contato
+- Email: lucasrti@hotmail.com
+- Website: [luccasdev.github.io](https://luccasdev.github.io/)
+
+---
+
 # Desafio 2: Crawlers
 
 Parte do trabalho na IDwall inclui desenvolver *crawlers/scrapers* para coletar dados de websites.
