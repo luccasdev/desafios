@@ -89,6 +89,7 @@ Content-Type: application/json
 2. Abra a pasta princípal do projeto das Strings
 3. Execute o comando: ```docker build -t crawler . ``` para que seja criado a imagem do docker
 4. Execute o comando: ```docker run -d --name crawler crawler ```
+5. E por fim hame o nosso amigo bot procurando no Telegram por: MrLukeRedditBot
 
 ---
 
