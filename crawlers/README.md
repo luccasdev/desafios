@@ -86,7 +86,7 @@ Content-Type: application/json
 ``` 
 - Rodando o Container Docker
 1. Efetue o git clone do projeto
-2. Abra a pasta princípal do projeto das Strings
+2. Abra a pasta princípal do projeto do Crawler
 3. Execute o comando: ```docker build -t crawler . ``` para que seja criado a imagem do docker
 4. Execute o comando: ```docker run -d --name crawler crawler ```
 5. E por fim chame o nosso amigo bot procurando no Telegram por: MrLukeRedditBot
