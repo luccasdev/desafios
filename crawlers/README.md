@@ -71,7 +71,7 @@ Content-Type: application/json
   }
 ]
 ```
-**Tratamento ao enviar não enviar subreddits:**
+**Tratamento ao não enviar subreddits:**
 ```json
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
